@@ -1,26 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Calculator app</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Calculator app</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
+  <body>
+    <div class="container-fluid container-all">
+      <div class="header">
+        <div class = "calc-textBox">
+        <h1 class = "calcText">calc</h1>
+        </div>
+        <!-- Toggle bar -->
+        <div class="container toggle-bar">
+          <div class="row row-cols-2">
+            <div class="col"></div>
+            <div class="col theme">1 2 3</div>
+            <div class="col theme">THEME</div>
+            <div class="col">
+              <!--<label
+                for="customRange3"
+                class="form-label justify-content-end"
+              > THEME </label>-->
+              <input
+                type="range"
+                class="form-range"
+                min="0"
+                max="2"
+                step="1"
+                id="customRange3"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="ariayang.githut.io">Aria Yang</a>.
-  </div>
-</body>
+      <!-- Result Screen -->
+      <div class="container-fluid result-screen">0</div>
+
+      <!-- Keys -->
+      <div class="container container-keys">
+        <div class="row row-cols-4 row-cols-md-4">
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id ="7">
+              7
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="8">
+              8
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="9">
+              9
+            </button>
+          </div>
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-secondary small-button delBtn numbersBtn" id="del"
+            >
+              DEL
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="4">
+              4
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="5">
+              5
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="6">
+              6
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn operatorBtn"  id="+">
+              +
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn"  id="1">
+              1
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="2">
+              2
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="3">
+              3
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn operatorBtn" id="-">
+              -
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn pointBtn" id=".">
+              .
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn numberBtn" id="0">
+              0
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn operatorBtn"  id="/">
+              /
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-secondary small-button numbersBtn operatorBtn"  id="*">
+              x
+            </button>
+          </div>
+          <div class="col-6 col-md-6">
+            <button type="button" class="btn btn-secondary big-button numbersBtn resetBtn"  id="reset">
+              RESET
+            </button>
+          </div>
+          <div class="col-6 col-md-6">
+            <button type="button" class="btn btn-secondary big-button numbersBtn eqlButton"  id="=">
+              =
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="ariayang.githut.io">Aria Yang</a>.
+      </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="index.js" async defer></script>
+    </div>
+  </body>
 </html>

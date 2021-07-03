@@ -1,0 +1,166 @@
+body {
+    font-family:'Spartan', sans-serif;
+    font-size: 2rem;
+    background-color: hsl(222, 26%, 31%);
+}
+
+a {
+    text-decoration: none;
+    color:hsl(30, 25%, 89%);
+}
+
+/********** Body **********/
+.container-all {
+    width: 40%;
+}
+
+@media only screen and (max-width: 573px)  {
+    .container-all {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 800px)  {
+    .container-all {
+        width: 70%;
+    }
+}
+
+
+/********** Header **********/
+.header {
+    color: #fff;
+    display: flex;
+    margin: 30px 1px 10px 0;
+    align-items: flex-end;
+}
+
+.calc-textBox {
+    vertical-align: bottom;
+}
+
+.calcText {
+    vertical-align: bottom;
+}
+
+.toggle-bar {
+    text-align: end;
+    justify-content: end;
+    align-items: flex-end;
+    width: 50%;
+    margin: auto 0 0 auto;
+    flex-wrap: nowrap;
+    vertical-align: bottom;
+    padding-right: 0;
+}
+
+.theme {
+    font-size: 0.7rem;
+    font-weight: 500;
+    vertical-align: bottom;
+}
+
+.form-label {
+    font-size: 0.7rem;
+    vertical-align: bottom;
+}
+
+.form-range {
+    width: 55%;
+    vertical-align: bottom;
+}
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 50px;
+      -webkit-appearance: none;
+      color: #13bba4;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 15px;
+      -webkit-appearance: none;
+      color: #13bba4;
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 15px;
+      /*cursor: ew-resize;*/
+      background: #434343;
+    }
+
+}
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+    background-color: #43e5f7; 
+  }
+  input[type="range"]::-moz-range-track {  
+    background-color: #9a905d;
+  }
+  /* IE*/
+  input[type="range"]::-ms-fill-lower {
+    background-color: #43e5f7; 
+  }
+  input[type="range"]::-ms-fill-upper {  
+    background-color: #9a905d;
+  }
+  
+
+.result-screen {
+    background-color: hsl(224, 36%, 15%);
+    border-radius: 5%;
+    font-size: 3rem;
+    text-align: end;
+    color:hsl(30, 25%, 89%);
+    padding-top: 15px;
+    padding-right: 15px;
+    font-weight: 700;
+}
+
+/********** BUTTONS **********/
+.container-keys {
+    background-color: hsl(223, 31%, 20%);
+    text-align: center;
+    margin: 20px 0;
+}
+
+.numbersBtn {
+    position: relative;
+    font-weight: 700;
+    width: 95%;
+    margin: 7% 3%;
+    box-shadow: 1px 2px hsl(28, 16%, 65%);
+    border: 0;
+    border-radius: 10%;
+}
+
+.small-button {
+    background-color: hsl(30, 25%, 89%);
+    color: hsl(221, 14%, 31%);
+}
+
+.delBtn {
+    background-color: hsl(225, 21%, 49%);
+    color: #fff;
+    font-size: 0.8rem;
+    box-shadow: 1px 2px hsl(224, 28%, 35%);
+}
+
+.big-button {
+    background-color: hsl(225, 21%, 49%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    box-shadow: 1px 2px hsl(224, 28%, 35%);
+}
+
+.eqlButton {
+    background-color: hsl(225, 21%, 49%);
+    background-color: hsl(6, 63%, 50%);
+    box-shadow: 1px 2px hsl(6, 70%, 34%);
+}
