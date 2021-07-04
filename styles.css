@@ -46,7 +46,8 @@ a {
     text-align: end;
     justify-content: end;
     align-items: flex-end;
-    width: 50%;
+    width: 25%;
+    min-width: 120px;
     margin: auto 0 0 auto;
     flex-wrap: nowrap;
     vertical-align: bottom;
@@ -55,61 +56,43 @@ a {
 
 .theme {
     font-size: 0.7rem;
-    font-weight: 500;
+    font-weight: 700;
     vertical-align: bottom;
+    align-items: flex-end;
+    justify-content: end;
 }
 
-.form-label {
-    font-size: 0.7rem;
-    vertical-align: bottom;
+.theme-nums {
+    letter-spacing: 0.15rem;
+    min-width: 60px;
 }
 
-.form-range {
-    width: 55%;
-    vertical-align: bottom;
+.theme-text {
+    text-align: end;
 }
 
-/*Chrome*/
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    input[type='range'] {
-      overflow: hidden;
-      width: 50px;
-      -webkit-appearance: none;
-      color: #13bba4;
-    }
-    
-    input[type='range']::-webkit-slider-runnable-track {
-      height: 15px;
-      -webkit-appearance: none;
-      color: #13bba4;
-      margin-top: -1px;
-    }
-    
-    input[type='range']::-webkit-slider-thumb {
-      width: 10px;
-      -webkit-appearance: none;
-      height: 15px;
-      /*cursor: ew-resize;*/
-      background: #434343;
-    }
+.switch-toggle {
+    float: right;
+    background: #242729;
+    border-radius: 35%;
+ }
+ .switch-toggle input {
+   position: absolute;
+   opacity: 0;
+ }
+ .switch-toggle input + label {
+   padding: 7px;
+   float:left;
+   color: #fff;
+   cursor: pointer;
+   font-size: 0.6rem;
+   font-weight: 700;
+ }
+ .switch-toggle input:checked + label {
+   background: hsl(6, 63%, 50%);
+   border-radius: 100%;
+ }
 
-}
-
-/** FF*/
-input[type="range"]::-moz-range-progress {
-    background-color: #43e5f7; 
-  }
-  input[type="range"]::-moz-range-track {  
-    background-color: #9a905d;
-  }
-  /* IE*/
-  input[type="range"]::-ms-fill-lower {
-    background-color: #43e5f7; 
-  }
-  input[type="range"]::-ms-fill-upper {  
-    background-color: #9a905d;
-  }
-  
 
 .result-screen {
     background-color: hsl(224, 36%, 15%);
@@ -165,3 +148,5 @@ input[type="range"]::-moz-range-progress {
     background-color: hsl(6, 63%, 50%);
     box-shadow: 1px 2px hsl(6, 70%, 34%);
 }
+
+/**** theme 2******/

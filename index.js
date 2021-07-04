@@ -191,7 +191,5 @@ $(document).keydown(function (event) {
 
 
 
-/* slider range */
-$('input').change(function() {
-    $('#res').html(this.value);
-})
+//TODO: change themes
+// when clicked toggle bar, add class for specific elements, or just change colors in script.
