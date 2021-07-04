@@ -20,16 +20,20 @@ $(".numberBtn").click(function(event){
 });
 
 //Handling the point
-$(".pointBtn").click(function(event) {
-    var currentButton = $(this).attr("id");
+function pointOps(key) {
     if (inputNumber.length === 0) {
         inputNumber.push("0");
-        inputNumber.push(currentButton); 
+        inputNumber.push(key); 
         currentValue = 0;
         $(".result-screen").text("0");
     } else if (!inputNumber.includes(".")) {
-        numbersInputOps(currentButton);
+        numberInputOps(key);
     }
+}
+
+$(".pointBtn").click(function(event) {
+    var currentButton = $(this).attr("id");
+    pointOps(currentButton);
 });
 
 //Reset
@@ -53,7 +57,7 @@ function operatorInputOps(key) {
 
     if (currentValue != null)  {
         equationCache.push(currentValue);
-        console.log("currentValue " + currentValue + "pushed");
+        //console.log("currentValue " + currentValue + "pushed");
         checkOperatorOrder();
     }
 
@@ -92,11 +96,11 @@ function checkOperatorOrder() {
                     break;
             }
             if (tempValue != null) {
-                console.log("Previous operator is * or /, tempValue is " + tempValue);
-                console.log("current equationCache before tempValue pushed is: " + equationCache);
+                //console.log("Previous operator is * or /, tempValue is " + tempValue);
+                //console.log("current equationCache before tempValue pushed is: " + equationCache);
                 equationCache = equationCache.splice(0, operatorToCheckIndex - 1);
                 equationCache.push(tempValue);
-                console.log("current equationCache with tempValue pushed is: " + equationCache);
+                //console.log("current equationCache with tempValue pushed is: " + equationCache);
                 currentValue = tempValue;
                 $(".result-screen").text(currentValue);
             }
@@ -104,10 +108,7 @@ function checkOperatorOrder() {
 }
 
 //calculate the result, display the result
-
-$(".eqlButton").click(function(event) {
-    var currentButton = $(this).attr("id");
-    
+function eqlOps() {
     if (currentValue != null) {
         equationCache.push(currentValue);
     }
@@ -116,35 +117,36 @@ $(".eqlButton").click(function(event) {
 
     var equationLength = equationCache.length;
     currentResult = equationCache[0];
-    console.log("currentResult is: " + currentResult);
+    //console.log("currentResult is: " + currentResult);
     if (typeof(equationLength[equationLength - 1]) != "number") {
         equationLength--;
     }
     for (var i = 1; i < equationLength; i = i+2) {
-        console.log(equationCache[i]);
+        //console.log(equationCache[i]);
         //no operator priority first
         switch (equationCache[i]) {
           case "+":
             currentResult += equationCache[i + 1];
-            console.log(currentResult);
             break;
           case "-":
             currentResult -= equationCache[i + 1];
-            console.log(currentResult);
             break;
           case "*":
             currentResult *= equationCache[i + 1];
-            console.log(currentResult);
             break;
           case "/":
             currentResult = currentResult / equationCache[i + 1];
-            console.log(currentResult);
             break;
         }
     }
     $(".result-screen").text(currentResult);
     performedEqual = true;
     softReset();
+}
+
+$(".eqlButton").click(function(event) {
+    eqlOps();
+
 });
 
 $(".resetBtn").click(function(){
@@ -154,7 +156,7 @@ $(".resetBtn").click(function(){
 //TODO: respond to keyboard numbers and operators
 $(document).keydown(function (event) { 
     var keyPressed = event.key;
-    console.log(keyPressed);
+    //console.log(keyPressed);
     //TO check if it's numbers or operators
     var numbersArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     var operatorsArr = ["+", "-", "*", "/"];
@@ -163,9 +165,9 @@ $(document).keydown(function (event) {
     } else if (operatorsArr.includes(keyPressed)) {
         operatorInputOps(keyPressed);
     } else if (keyPressed === "Enter") {
-        //TODO: perform Equal operation
+        eqlOps();
     } else if (keyPressed === ".") {
-        //TODO: perform . operation
+        pointOps(keyPressed);
     } else if (keyPressed === "Backspace") {
         //TODO: perform del operation
     }
