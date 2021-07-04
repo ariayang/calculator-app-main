@@ -6,24 +6,30 @@ var currentResult = null;   // the result currently showing on screen
 var performedEqual = false; // if "=" was clicked, currentValue = currentResult, equationCache empty
 
 // Numbers input
-$(".numberBtn").click(function(event){
-    performedEqual = false;
-    var currentButton = $(this).attr("id");
-    inputNumber.push(currentButton); 
+function numberInputOps(key) {
+    inputNumber.push(key); 
     currentValue = inputNumber.join('');
     currentValue = parseFloat(currentValue);
     $(".result-screen").text(currentValue);
+}
+
+$(".numberBtn").click(function(event){
+    performedEqual = false;
+    var currentButton = $(this).attr("id");
+    numberInputOps(currentButton);
 });
 
 //Handling the point
 $(".pointBtn").click(function(event) {
     var currentButton = $(this).attr("id");
-    if (!inputNumber.includes(".")) {
+    if (inputNumber.length === 0) {
+        inputNumber.push("0");
         inputNumber.push(currentButton); 
+        currentValue = 0;
+        $(".result-screen").text("0");
+    } else if (!inputNumber.includes(".")) {
+        numbersInputOps(currentButton);
     }
-    currentValue = inputNumber.join('');
-    currentValue = parseFloat(currentValue);
-    $(".result-screen").text(currentValue);
 });
 
 //Reset
@@ -42,27 +48,30 @@ function softReset() {
     currentValue = currentResult;
 }
 
-//TODO:
- $(".operatorBtn").click(function(event) {
+// Numbers input
+function operatorInputOps(key) {
+
     if (currentValue != null)  {
         equationCache.push(currentValue);
         console.log("currentValue " + currentValue + "pushed");
         checkOperatorOrder();
     }
 
-    var currentButton = $(this).attr("id");
 
     if (equationCache[equationCache.length - 1] === currentValue) {
-        //console.log("currentValue" + previousOperator);
-        equationCache.push(currentButton);
-        console.log("current equationCache after push is: " + equationCache);
+        equationCache.push(key);
+        //console.log("current equationCache after push is: " + equationCache);
         currentValue = null;
         inputNumber = [];
     } else {
-        equationCache[equationCache.length-1] = currentButton;
-        console.log("current equationCache with operator replacement is: " + equationCache);
+        equationCache[equationCache.length-1] = key;
+        //console.log("current equationCache with operator replacement is: " + equationCache);
     }
+}
 
+ $(".operatorBtn").click(function(event) {
+    var currentButton = $(this).attr("id");
+    operatorInputOps(currentButton);
 
     //currentValue = parseFloat(currentValue);
     //$(".result-screen").text(currentValue);
@@ -98,15 +107,7 @@ function checkOperatorOrder() {
 
 $(".eqlButton").click(function(event) {
     var currentButton = $(this).attr("id");
-    //push curent Value into equation cache
     
-    // reset the inputNumber, currentValue
-    // check if previous button is operator or not
-    //var operatorsArray = ["+", "-", "*", "/"];
-    //var previousOperator = false;
-    /*if(!operatorsArray.includes(equationCache[equationCache.length - 1])) {
-        previousOperator = true;
-    }*/
     if (currentValue != null) {
         equationCache.push(currentValue);
     }
@@ -151,6 +152,25 @@ $(".resetBtn").click(function(){
 });
 
 //TODO: respond to keyboard numbers and operators
+$(document).keydown(function (event) { 
+    var keyPressed = event.key;
+    console.log(keyPressed);
+    //TO check if it's numbers or operators
+    var numbersArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    var operatorsArr = ["+", "-", "*", "/"];
+    if (numbersArr.includes(keyPressed)) {
+        numberInputOps(keyPressed);
+    } else if (operatorsArr.includes(keyPressed)) {
+        operatorInputOps(keyPressed);
+    } else if (keyPressed === "Enter") {
+        //TODO: perform Equal operation
+    } else if (keyPressed === ".") {
+        //TODO: perform . operation
+    } else if (keyPressed === "Backspace") {
+        //TODO: perform del operation
+    }
+});
+
 
 
 /* slider range */
