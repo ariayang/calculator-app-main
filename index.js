@@ -80,19 +80,16 @@ function operatorInputOps(key) {
 
     if (currentValue != null)  {
         equationCache.push(currentValue);
-        //console.log("currentValue " + currentValue + "pushed");
         checkOperatorOrder();
     }
 
 
     if (equationCache[equationCache.length - 1] === currentValue) {
         equationCache.push(key);
-        //console.log("current equationCache after push is: " + equationCache);
         currentValue = null;
         inputNumber = [];
     } else {
         equationCache[equationCache.length-1] = key;
-        //console.log("current equationCache with operator replacement is: " + equationCache);
     }
 }
 
@@ -100,6 +97,7 @@ function operatorInputOps(key) {
     var currentButton = $(this).attr("id");
     operatorInputOps(currentButton);
 
+    //TODO: update result screen while oeprators in
     //currentValue = parseFloat(currentValue);
     //$(".result-screen").text(currentValue);
 });
@@ -140,13 +138,10 @@ function eqlOps() {
 
     var equationLength = equationCache.length;
     currentResult = equationCache[0];
-    //console.log("currentResult is: " + currentResult);
     if (typeof(equationLength[equationLength - 1]) != "number") {
         equationLength--;
     }
     for (var i = 1; i < equationLength; i = i+2) {
-        //console.log(equationCache[i]);
-        //no operator priority first
         switch (equationCache[i]) {
           case "+":
             currentResult += equationCache[i + 1];
@@ -179,8 +174,6 @@ $(".resetBtn").click(function(){
 //TODO: respond to keyboard numbers and operators
 $(document).keydown(function (event) { 
     var keyPressed = event.key;
-    //console.log(keyPressed);
-    //TO check if it's numbers or operators
     var numbersArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     var operatorsArr = ["+", "-", "*", "/"];
     if (numbersArr.includes(keyPressed)) {
