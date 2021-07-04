@@ -47,29 +47,7 @@ function softReset() {
     if (currentValue != null)  {
         equationCache.push(currentValue);
         console.log("currentValue " + currentValue + "pushed");
-        var tempValue = null;
-        //check previous operator, if "* /", perform that operation, update the equation cache, current result, display
-        if (equationCache.length >= 3) {
-            operatorToCheckIndex = equationCache.length - 2;
-            operatorToCheck = equationCache[operatorToCheckIndex];
-            switch(operatorToCheck) {
-                case "*":
-                    tempValue = equationCache[operatorToCheckIndex - 1] * equationCache[operatorToCheckIndex + 1];
-                    break;
-                case "/":
-                    tempValue = equationCache[operatorToCheckIndex - 1] / equationCache[operatorToCheckIndex + 1];
-                    break;
-            }
-            if (tempValue != null) {
-                console.log("Previous operator is * or /, tempValue is " + tempValue);
-                console.log("current equationCache before tempValue pushed is: " + equationCache);
-                equationCache = equationCache.splice(0, operatorToCheckIndex - 1);
-                equationCache.push(tempValue);
-                console.log("current equationCache with tempValue pushed is: " + equationCache);
-                currentValue = tempValue;
-            }
-        }
-
+        checkOperatorOrder();
     }
 
     var currentButton = $(this).attr("id");
@@ -90,6 +68,32 @@ function softReset() {
     //$(".result-screen").text(currentValue);
 });
 
+function checkOperatorOrder() {
+    var tempValue = null;
+        //check previous operator, if "* /", perform that operation, update the equation cache, current result, display
+        if (equationCache.length >= 3) {
+            operatorToCheckIndex = equationCache.length - 2;
+            operatorToCheck = equationCache[operatorToCheckIndex];
+            switch(operatorToCheck) {
+                case "*":
+                    tempValue = equationCache[operatorToCheckIndex - 1] * equationCache[operatorToCheckIndex + 1];
+                    break;
+                case "/":
+                    tempValue = equationCache[operatorToCheckIndex - 1] / equationCache[operatorToCheckIndex + 1];
+                    break;
+            }
+            if (tempValue != null) {
+                console.log("Previous operator is * or /, tempValue is " + tempValue);
+                console.log("current equationCache before tempValue pushed is: " + equationCache);
+                equationCache = equationCache.splice(0, operatorToCheckIndex - 1);
+                equationCache.push(tempValue);
+                console.log("current equationCache with tempValue pushed is: " + equationCache);
+                currentValue = tempValue;
+                $(".result-screen").text(currentValue);
+            }
+        }
+}
+
 //calculate the result, display the result
 
 $(".eqlButton").click(function(event) {
@@ -106,6 +110,8 @@ $(".eqlButton").click(function(event) {
     if (currentValue != null) {
         equationCache.push(currentValue);
     }
+
+    checkOperatorOrder();
 
     var equationLength = equationCache.length;
     currentResult = equationCache[0];
