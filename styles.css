@@ -120,6 +120,7 @@ input[type="range"]::-moz-range-progress {
     padding-top: 15px;
     padding-right: 15px;
     font-weight: 700;
+    overflow: hidden;
 }
 
 /********** BUTTONS **********/

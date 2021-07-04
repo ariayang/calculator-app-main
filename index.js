@@ -20,6 +20,8 @@ $(".numberBtn").click(function(event){
 });
 
 //Handling the point
+//TODO: 0.2*3=0.60000000000001
+//TODO: 9999999999 -> 100000000000
 function pointOps(key) {
     if (inputNumber.length === 0) {
         inputNumber.push("0");
@@ -35,6 +37,26 @@ $(".pointBtn").click(function(event) {
     var currentButton = $(this).attr("id");
     pointOps(currentButton);
 });
+
+// 'delete' function
+function delOps() {
+    if (inputNumber.length > 0) {
+        inputNumber.pop();
+        if (inputNumber.length > 0) {
+            currentValue = inputNumber.join('');
+            currentValue = parseFloat(currentValue);
+            $(".result-screen").text(currentValue);
+        } else {
+            currentValue = 0;
+            $(".result-screen").text(0);
+        }
+    }
+}
+
+$(".delBtn").click(function() {
+    delOps();
+});
+
 
 //Reset
 function hardReset() {
@@ -53,6 +75,7 @@ function softReset() {
 }
 
 // Numbers input
+// TODO: Display after hidden overflow still overflows
 function operatorInputOps(key) {
 
     if (currentValue != null)  {
@@ -169,7 +192,7 @@ $(document).keydown(function (event) {
     } else if (keyPressed === ".") {
         pointOps(keyPressed);
     } else if (keyPressed === "Backspace") {
-        //TODO: perform del operation
+        delOps();
     }
 });
 
