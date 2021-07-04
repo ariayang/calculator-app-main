@@ -1,9 +1,9 @@
 //push a button, display on screen
-var inputNumber = [];
-var currentValue = null;  
-var equationCache = [];
-var currentResult = null;
-var performedEqual = false;
+var inputNumber = [];  //Array storing the digit buttons clicked before clicking operator or equal
+var currentValue = null;  // inputNumber array converted Value
+var equationCache = [];     // storing the equation sequence
+var currentResult = null;   // the result currently showing on screen
+var performedEqual = false; // if "=" was clicked, currentValue = currentResult, equationCache empty
 
 // Numbers input
 $(".numberBtn").click(function(event){
@@ -35,6 +35,7 @@ function hardReset() {
     $(".result-screen").text("0");
 }
 
+// performed after a "=" operation
 function softReset() {
     inputNumber = [];
     equationCache = [];
@@ -43,44 +44,47 @@ function softReset() {
 
 //TODO:
  $(".operatorBtn").click(function(event) {
-    equationCache.push(currentValue);
+    if (currentValue != null)  {
+        equationCache.push(currentValue);
+        console.log("currentValue " + currentValue + "pushed");
+        var tempValue = null;
+        //check previous operator, if "* /", perform that operation, update the equation cache, current result, display
+        if (equationCache.length >= 3) {
+            operatorToCheckIndex = equationCache.length - 2;
+            operatorToCheck = equationCache[operatorToCheckIndex];
+            switch(operatorToCheck) {
+                case "*":
+                    tempValue = equationCache[operatorToCheckIndex - 1] * equationCache[operatorToCheckIndex + 1];
+                    break;
+                case "/":
+                    tempValue = equationCache[operatorToCheckIndex - 1] / equationCache[operatorToCheckIndex + 1];
+                    break;
+            }
+            if (tempValue != null) {
+                console.log("Previous operator is * or /, tempValue is " + tempValue);
+                console.log("current equationCache before tempValue pushed is: " + equationCache);
+                equationCache = equationCache.splice(0, operatorToCheckIndex - 1);
+                equationCache.push(tempValue);
+                console.log("current equationCache with tempValue pushed is: " + equationCache);
+                currentValue = tempValue;
+            }
+        }
+
+    }
+
     var currentButton = $(this).attr("id");
 
-    //console.log("currentButton");
-    // reset the inputNumber, currentValue, store the operator
-    //check if previous button is operator or not
-    var operatorsArray = ["+", "-", "*", "/"];
-    var previousOperator = false;
-    if (performedEqual) {
-        previousOperator = true;
-    } else if(!operatorsArray.includes(equationCache[equationCache.length - 1])) {
-        previousOperator = true;
-    }
-    if (currentValue != null && previousOperator) {
+    if (equationCache[equationCache.length - 1] === currentValue) {
+        //console.log("currentValue" + previousOperator);
         equationCache.push(currentButton);
-        console.log("current equationCache is: " + equationCache);
+        console.log("current equationCache after push is: " + equationCache);
         currentValue = null;
         inputNumber = [];
+    } else {
+        equationCache[equationCache.length-1] = currentButton;
+        console.log("current equationCache with operator replacement is: " + equationCache);
     }
 
-    /*switch (currentButton) {
-      case "+":
-        equationCache.push("+");
-        break;
-      case "*":
-        equationCache.push("*");
-        break;
-      case "-":
-        equationCache.push("-");
-        break;
-      case "/":
-        equationCache.push("/");
-        break;
-    }*/
-
-    // then multiple operator, to detect if this is the first operator entered
-
-    // multiple operator also needs to consider priority
 
     //currentValue = parseFloat(currentValue);
     //$(".result-screen").text(currentValue);
