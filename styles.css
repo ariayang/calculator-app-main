@@ -144,9 +144,11 @@ a {
 }
 
 .eqlButton {
-    background-color: hsl(225, 21%, 49%);
+    /*background-color: hsl(225, 21%, 49%);*/
     background-color: hsl(6, 63%, 50%);
     box-shadow: 1px 2px hsl(6, 70%, 34%);
 }
 
-/**** theme 2******/
+.attribution {
+    color: hsl(28, 16%, 65%);
+}
